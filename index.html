@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rocío del Pilar Tenorio - Tarjeta Digital</title>
+  <title>Demo - Tarjeta Digital</title>
 
   <!-- Metadatos para vista previa al compartir -->
-  <meta property="og:title" content="Tarjeta Digital - Rocío del Pilar Tenorio">
-  <meta property="og:description" content="Gerente de Finanzas y Contabilidad en Ashimori Industria de México. Contáctame fácilmente desde mi tarjeta digital.">
-  <meta property="og:image" content="https://i.postimg.cc/qB3VCTcs/logo-ashimori.png">
-  <meta property="og:url" content="https://tusitio.com/rocio-tenorio">
+  <meta property="og:title" content="Tarjeta Digital - Demo">
+  <meta property="og:description" content="Gerente de Finanzas y Contabilidad en X Industria de México. Contáctame fácilmente desde mi tarjeta digital.">
+  <meta property="og:image" content="imagenes/card-preview.jpg">
+  <meta property="og:url" content="https://demo-beta-sage.vercel.app/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -21,8 +21,7 @@
       --card:rgba(255,255,255,.18);
       --ink:#fff;
       --accent:#7cc0ff;
-      --soft-hi:rgba(255,255,255,.55);
-      --soft-lo:rgba(0,0,0,.35);
+      --divider:linear-gradient(180deg,rgba(255,255,255,.28),rgba(0,0,0,.40),rgba(255,255,255,.22));
     }
     body{
       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
@@ -34,16 +33,25 @@
     #splash{
       position:fixed;inset:0;z-index:9999;
       display:flex;align-items:center;justify-content:center;
-      background:url('https://i.postimg.cc/PJBHGr5N/fondo-ashimori.jpg') center/cover no-repeat;
-      animation:fadeOut .5s ease-in-out 2.5s forwards;
+      background:url('https://imagenes/logo.jpg') center/cover no-repeat;
+      animation:fadeOut .6s ease-in-out 3.2s forwards; /* se va después de que el logo “entre” */
     }
-    #splash-logo{display:flex;align-items:center;justify-content:center;animation:logoAppear 1s ease-out forwards}
-    #splash-logo img{max-width:90%;max-height:90%;object-fit:contain}
-    @media (max-width:768px){ #splash-logo img{max-width:95%;max-height:95%} }
+    #splash-logo{
+      display:flex;align-items:center;justify-content:center;
+      opacity:0; transform:scale(.6);
+      animation:logoReveal 1.8s cubic-bezier(.2,.9,.2,1.1) .4s forwards; /* aparece, crece y hace overshoot */
+    }
+    #splash-logo img{max-width:78vw; max-height:40vh; object-fit:contain}
+    @media (min-width:768px){ #splash-logo img{max-width:40vw; max-height:46vh} }
 
-    @keyframes logoAppear{0%{opacity:0;transform:scale(.3)}60%{transform:scale(1.1)}100%{opacity:1;transform:scale(1)}}
+    @keyframes logoReveal{
+      0%   {opacity:0; transform:scale(.6)}
+      55%  {opacity:1; transform:scale(1.06)}  /* overshoot suave */
+      80%  {opacity:1; transform:scale(.98)}
+      100% {opacity:1; transform:scale(1)}
+    }
     @keyframes fadeOut{to{opacity:0;visibility:hidden}}
-    #app{opacity:0;animation:appFadeIn .5s ease-in-out 2.8s forwards}
+    #app{opacity:0;animation:appFadeIn .5s ease-in-out 3.4s forwards} /* entra tras el splash */
     @keyframes appFadeIn{to{opacity:1}}
 
     /* ===== Header ===== */
@@ -57,27 +65,21 @@
       display:flex;align-items:center;justify-content:center;
     }
     .profile-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
-    .name{
-      color:#fff;font-size:clamp(24px,5vw,32px);line-height:1.15;letter-spacing:-.2px;
-      margin-bottom:8px;font-weight:700
-    }
-    .title{
-      color:rgba(255,255,255,.92);font-size:clamp(14px,2.6vw,18px);
-      line-height:1.25;margin-bottom:22px;font-weight:500
-    }
+    .name{color:#fff;font-size:clamp(24px,5vw,32px);line-height:1.15;margin-bottom:8px;font-weight:700}
+    .title{color:rgba(255,255,255,.92);font-size:clamp(14px,2.6vw,18px);margin-bottom:22px;font-weight:500}
 
     /* ===== Botonera superior ===== */
     .action-wrap{padding:0 16px}
     .action-buttons{
-      position:relative;display:flex;gap:0;align-items:stretch;
+      position:relative;display:flex;align-items:stretch;gap:0;
       max-width:520px;margin:0 auto;background:var(--card);border-radius:18px;padding:6px;
       box-shadow:0 10px 24px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.30), inset 0 -1px 0 rgba(0,0,0,.16);
       backdrop-filter:blur(2px);overflow:hidden
     }
-    .action-buttons::after{
-      content:"";position:absolute;top:6px;bottom:6px;left:50%;width:1px;transform:translateX(-.5px);
-      background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(0,0,0,.40),rgba(255,255,255,.22));
-      opacity:.9;pointer-events:none
+    .divider{
+      width:1px;margin:6px 6px; /* separadores visibles entre los 3 botones */
+      background:var(--divider);
+      opacity:.9; pointer-events:none;
     }
     .action-btn{
       flex:1 1 0;border:0;cursor:pointer;background:transparent;color:var(--ink);
@@ -89,33 +91,34 @@
     .action-btn svg{width:18px;height:18px;fill:currentColor}
     .action-btn:hover{background:rgba(255,255,255,.10)}
     .action-btn:active{transform:translateY(1px);background:rgba(255,255,255,.12)}
-    @media (max-width:360px){ .action-buttons{max-width:100%} .action-btn{font-size:11.5px;padding:9px 8px;min-height:44px} }
+
+    /* Botón de compartir (icon-only y más pequeño) */
+    .icon-btn{
+      flex:0 0 auto; width:46px; height:46px; border-radius:12px; padding:0;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .icon-btn svg{width:20px;height:20px}
+
+    @media (max-width:360px){
+      .action-buttons{max-width:100%}
+      .action-btn{font-size:11.5px;padding:9px 8px;min-height:44px}
+      .icon-btn{width:44px;height:44px}
+    }
 
     /* ===== Tarjeta de contacto ===== */
     .contact-info{
       background:#fff;margin:20px;border-radius:16px;padding:24px;
       box-shadow:0 8px 32px rgba(0,0,0,.1)
     }
-    .contact-item{
-      display:flex;align-items:flex-start;gap:15px;padding:14px 0;border-bottom:1px solid #f0f0f0;
-      cursor:pointer;transition:background .25s ease
-    }
+    .contact-item{display:flex;align-items:flex-start;gap:15px;padding:14px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;transition:background .25s ease}
     .contact-item:last-child{border-bottom:none}
     .contact-item:hover{background:#f8f9fa;border-radius:8px}
     .contact-icon{
       width:42px;height:42px;background:#f0f7ff;border-radius:50%;
       display:flex;align-items:center;justify-content:center;color:#0f3156;flex:0 0 42px;margin-top:2px
     }
-    .contact-details h3{
-      font-size:clamp(14px,3vw,18px);
-      color:#666;margin-bottom:4px;text-transform:uppercase;font-weight:400;letter-spacing:.4px
-    }
-    .contact-details p{
-      font-size:clamp(15px,3.4vw,17px);
-      line-height:1.25;color:#333;font-weight:500;
-      overflow-wrap:anywhere;word-break:break-word
-    }
-    .contact-item.clickable .contact-details p{color:#0066cc}
+    .contact-details h3{font-size:clamp(14px,3vw,18px);color:#666;margin-bottom:4px;text-transform:uppercase;font-weight:400}
+    .contact-details p{font-size:clamp(15px,3.4vw,17px);color:#333;font-weight:500;overflow-wrap:anywhere}
 
     /* ===== Redes ===== */
     .social-section{
@@ -124,20 +127,9 @@
     }
     .social-title{font-size:20px;font-weight:700;color:#333;margin-bottom:12px;text-align:center}
     .social-links{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .social-btn{
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-      padding:10px;min-height:80px;border:2px solid #f0f0f0;border-radius:10px;text-decoration:none;color:#666;
-      background:#fafafa;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease,background .15s ease
-    }
+    .social-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;min-height:80px;border:2px solid #f0f0f0;border-radius:10px;text-decoration:none;color:#666;background:#fafafa;transition:all .15s ease}
     .social-btn:hover{border-color:#e0e0e0;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.1);background:#fff}
-
-    /* Iconos más grandes, misma fila */
-    .social-btn img{
-      width:clamp(26px, 5vw, 34px);
-      height:clamp(26px, 5vw, 34px);
-      margin-bottom:6px;
-      object-fit:contain;display:block
-    }
+    .social-btn img{width:clamp(26px,5vw,34px);height:clamp(26px,5vw,34px);margin-bottom:6px}
     .social-btn span{font-size:clamp(9px,2.2vw,10px);letter-spacing:.5px;text-transform:uppercase;font-weight:700}
 
     /* ===== Toast ===== */
@@ -152,8 +144,8 @@
 
   <!-- Splash -->
   <div id="splash">
-    <div id="splash-logo">
-      <img src="https://i.postimg.cc/qB3VCTcs/logo-ashimori.png" alt="Logo Ashimori">
+    <div id="splash-logo" aria-hidden="true">
+      <img src="https://images/logo.png" alt="Logo Empresa">
     </div>
   </div>
 
@@ -161,24 +153,34 @@
   <div id="app">
     <header class="header">
       <div class="profile-photo">
-        <img src="imagenes/rocio-profile.png" alt="Foto de perfil de Rocío del Pilar Tenorio">
+        <img src="imagenes/foto-profile.png" alt="Foto de perfil de Demo">
       </div>
-      <h1 class="name">Rocío del Pilar Tenorio</h1>
+      <h1 class="name">Angel Durán Montelongo</h1>
       <p class="title">Gerente de Finanzas y Contabilidad</p>
 
       <div class="action-wrap">
-        <div class="action-buttons">
-          <a class="action-btn" href="imagenes/rocio-tenorio.vcf" download="rocio-tenorio.vcf" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        <div class="action-buttons" role="group" aria-label="Acciones">
+          <!-- Guardar -->
+          <a class="action-btn" href="imagenes/demo.vcf" download="demo.vcf" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
             Guardar
           </a>
+
+          <span class="divider" aria-hidden="true"></span>
+
+          <!-- Ubicación -->
           <button class="action-btn" type="button" onclick="openLocation()">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ubicación
           </button>
-          <button class="action-btn" type="button" onclick="shareCard()">
-            <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a3.3 3.3 0 000-1.39l7.02-4.11A2.99 2.99 0 0018 7.91c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .23.03.45.08.66L8.05 9.78A2.99 2.99 0 006 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.89 0 1.69-.39 2.25-1l7.03 4.11c-.05.2-.08.42-.08.64 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
-            Compartir
+
+          <span class="divider" aria-hidden="true"></span>
+
+          <!-- Compartir (icon-only, más pequeño) -->
+          <button class="icon-btn" type="button" onclick="shareCard()" aria-label="Compartir" title="Compartir">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a3.3 3.3 0 0 0 0-1.39l7.02-4.11A2.99 2.99 0 0 0 18 7.91c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .23.03.45.08.66L8.05 9.78A2.99 2.99 0 0 0 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.89 0 1.69-.39 2.25-1l7.03 4.11c-.05.2-.08.42-.08.64 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/>
+            </svg>
           </button>
         </div>
       </div>
@@ -192,7 +194,7 @@
         </div>
         <div class="contact-details">
           <h3>Teléfono</h3>
-          <p id="phone">+52 477 677 1008</p>
+          <p id="phone">+52 477 123 4567</p>
         </div>
       </div>
 
@@ -202,7 +204,7 @@
         </div>
         <div class="contact-details">
           <h3>Email</h3>
-          <p id="email">rocio.tenorio@ashimorimexico.com</p>
+          <p id="email">demo@gmail.com</p>
         </div>
       </div>
 
@@ -212,7 +214,7 @@
         </div>
         <div class="contact-details">
           <h3>Sitio Web</h3>
-          <p id="website">https://ashimori.com.mx/</p>
+          <p id="website">https://mipagina.com.mx/</p>
         </div>
       </div>
 
@@ -222,7 +224,7 @@
         </div>
         <div class="contact-details">
           <h3>Empresa</h3>
-          <p id="company">Ashimori Industria de México</p>
+          <p id="company">Industria de México</p>
         </div>
       </div>
 
@@ -241,34 +243,14 @@
     <div class="social-section">
       <h2 class="social-title">Sígueme en Redes Sociales</h2>
       <div class="social-links">
-        <a
-          class="social-btn"
-          href="https://www.linkedin.com/in/rocio-del-pilar-tenorio-elias-778010207?trk=contact-info"
-          target="_blank"
-          rel="noopener"
-        >
-          <img src="imagenes/linkedin.png" alt="LinkedIn">
-          <span>LinkedIn</span>
+        <a class="social-btn" href="https://www.linkedin.com/in/#" target="_blank" rel="noopener">
+          <img src="imagenes/linkedin.png" alt="LinkedIn"><span>LinkedIn</span>
         </a>
-
-        <a
-          class="social-btn"
-          href="https://www.instagram.com/rocio_del_pilar_t?igsh=MWryMzUydzZqNjdkZw=="
-          target="_blank"
-          rel="noopener"
-        >
-          <img src="imagenes/insta.png" alt="Instagram">
-          <span>Instagram</span>
+        <a class="social-btn" href="https://www.instagram.com/#" target="_blank" rel="noopener">
+          <img src="imagenes/insta.png" alt="Instagram"><span>Instagram</span>
         </a>
-
-        <a
-          class="social-btn"
-          href="https://wa.me/524776771008?text=Hola%2C%20me%20interesa%20contactarte"
-          target="_blank"
-          rel="noopener"
-        >
-          <img src="imagenes/whatsapp.png" alt="WhatsApp">
-          <span>WhatsApp</span>
+        <a class="social-btn" href="https://wa.me/524778811195?text=Hola%2C%20me%20interesa%20contactarte" target="_blank" rel="noopener">
+          <img src="imagenes/whatsapp.png" alt="WhatsApp"><span>WhatsApp</span>
         </a>
       </div>
     </div>
@@ -308,9 +290,9 @@
     /* === Compartir (Web Share API + Fallback) === */
     function shareCard(){
       const shareData = {
-        title: 'Tarjeta Digital - Rocío del Pilar Tenorio',
+        title: 'Tarjeta Digital - Demo',
         text: 'Conoce mis datos de contacto y redes en mi tarjeta digital.',
-        url: 'https://tusitio.com/rocio-tenorio'
+        url: 'https://demo-beta-sage.vercel.app/'
       };
 
       if (navigator.share) {
