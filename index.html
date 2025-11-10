@@ -22,9 +22,9 @@
   <meta property="og:site_name" content="Tarjeta Digital">
   <meta property="og:url" content="https://demo-beta-sage.vercel.app/">
 
-  <!-- Imagen OG (1200x630, <2MB). Versiona en el NOMBRE (v1, v2, v3...) -->
-  <meta property="og:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v1.jpg">
-  <meta property="og:image:secure_url" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v1.jpg">
+  <!-- Imagen OG (1200x630, <2MB). VERSIONADA EN EL NOMBRE -->
+  <meta property="og:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v2.jpg">
+  <meta property="og:image:secure_url" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v2.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/jpeg">
@@ -34,7 +34,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Tarjeta Digital – Ángel Durán Monte">
   <meta name="twitter:description" content="Gerente de Finanzas y Contabilidad. Contáctame desde mi tarjeta digital.">
-  <meta name="twitter:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v1.jpg">
+  <meta name="twitter:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v2.jpg">
 
   <style>
     /* ===== Reset & Vars ===== */
@@ -144,8 +144,15 @@
     .contact-details h3{font-size:clamp(14px,3vw,18px);color:#666;margin-bottom:4px;text-transform:uppercase;font-weight:400}
     .contact-details p{font-size:clamp(15px,3.4vw,17px);color:#333;font-weight:500;overflow-wrap:anywhere}
 
-    .clickable-link{color:var(--link);text-decoration:none;cursor:pointer;transition:color .15s ease;display:inline-block}
-    .clickable-link:hover{color:var(--link-hover)}
+    /* Links SIEMPRE en azul y subrayados */
+    .clickable-link{
+      color:var(--link) !important;
+      text-decoration: underline;
+      cursor: pointer;
+      display:inline-block;
+      transition:color .15s ease;
+    }
+    .clickable-link:hover{ color:var(--link-hover) }
 
     /* ===== Redes ===== */
     .social-section{
@@ -196,9 +203,9 @@
           <span class="divider" aria-hidden="true"></span>
 
           <!-- Ubicación -->
-          <button class="action-btn" type="button" onclick="openLocation()">
+          <button class="action-btn" type="button" onclick="showToast('Abriendo Google Maps...') && false">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            Ubicación
+            <a href="https://www.google.com/maps/search/?api=1&query=Circuito%20San%20Roque%20Norte%20%23345%2C%20Parque%20industrial%20Santa%20Fe%20Ampliaci%C3%B3n%2C%20Silao%2C%20Guanajuato%2C%20M%C3%A9xico%2C%20C.P.%2036275" target="_blank" rel="noopener" class="clickable-link" onclick="showToast('Abriendo Google Maps...')">Ubicación</a>
           </button>
 
           <span class="divider" aria-hidden="true"></span>
@@ -221,7 +228,7 @@
         </div>
         <div class="contact-details">
           <h3>Teléfono</h3>
-          <p id="phone" class="clickable-link" onclick="callPhone()">+52 477 123 45 67</p>
+          <a id="phone" class="clickable-link" href="tel:+524771234567" onclick="showToast('Abriendo aplicación de teléfono...')">+52 477 123 45 67</a>
         </div>
       </div>
 
@@ -231,27 +238,31 @@
         </div>
         <div class="contact-details">
           <h3>Email</h3>
-          <p id="email" class="clickable-link" onclick="sendEmail()">correo@miempresa.com</p>
+          <a id="email" class="clickable-link" href="mailto:correo@miempresa.com?subject=Contacto%20desde%20tarjeta%20digital&body=Hola%20%C3%81ngel%20Dur%C3%A1n%20Monte," onclick="showToast('Abriendo aplicación de email...')">correo@miempresa.com</a>
         </div>
       </div>
 
       <div class="contact-item">
         <div class="contact-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5  7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
         </div>
         <div class="contact-details">
           <h3>Sitio Web</h3>
-          <p id="website" class="clickable-link" onclick="openWebsite()">https://mipagina.com.mx/</p>
+          <a id="website" class="clickable-link" href="https://mipagina.com.mx/" target="_blank" rel="noopener" onclick="showToast('Abriendo sitio web...')">https://mipagina.com.mx/</a>
         </div>
       </div>
 
-      <div class="contact-item clickable" onclick="openMaps()">
+      <div class="contact-item">
         <div class="contact-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         </div>
         <div class="contact-details">
           <h3>Dirección</h3>
-          <p id="address">Circuito San Roque Norte #345, Parque industrial Santa Fe Ampliación, Silao, Guanajuato, México, C.P. 36275</p>
+          <a id="address" class="clickable-link" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/search/?api=1&query=Circuito%20San%20Roque%20Norte%20%23345%2C%20Parque%20industrial%20Santa%20Fe%20Ampliaci%C3%B3n%2C%20Silao%2C%20Guanajuato%2C%20M%C3%A9xico%2C%20C.P.%2036275"
+             onclick="showToast('Abriendo Google Maps...')">
+            Circuito San Roque Norte #345, Parque industrial Santa Fe Ampliación, Silao, Guanajuato, México, C.P. 36275
+          </a>
         </div>
       </div>
     </div>
@@ -277,34 +288,12 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
-    /* Utilidades UI */
+    /* Toast pequeño reutilizable */
     function showToast(msg){
       const t=document.getElementById('toast');
-      t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);
-    }
-
-    /* Acciones contacto */
-    function callPhone(){
-      const raw=(document.getElementById('phone').textContent||'').trim();
-      let cleaned=raw.replace(/[^\d+]/g,'').replace(/(?!^)\+/g,'');
-      window.location.href=`tel:${cleaned}`;showToast('Abriendo aplicación de teléfono...');
-    }
-    function sendEmail(){
-      const email=document.getElementById('email').textContent.trim();
-      const name=document.querySelector('.name').textContent.trim();
-      window.open(`mailto:${email}?subject=Contacto desde tarjeta digital&body=Hola ${encodeURIComponent(name)},`,'_blank');
-      showToast('Abriendo aplicación de email...');
-    }
-    function openWebsite(){
-      let url=document.getElementById('website').textContent.trim();
-      if(!/^https?:\/\//i.test(url)) url='https://'+url;
-      window.open(url,'_blank','noopener,noreferrer');showToast('Abriendo sitio web...');
-    }
-    function openLocation(){ openMaps(); }
-    function openMaps(){
-      const address=document.getElementById('address').textContent;
-      const mapsUrl=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
-      window.open(mapsUrl,'_blank','noopener,noreferrer');showToast('Abriendo Google Maps...');
+      t.textContent=msg; t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'),3000);
+      return true;
     }
 
     /* Compartir: usa la URL del <link rel="canonical"> */
