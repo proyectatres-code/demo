@@ -3,15 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rocío del Pilar Tenorio - Tarjeta Digital</title>
+  <title>Tarjeta Digital - Ángel Durán Montes</title>
 
-  <!-- Metadatos para vista previa al compartir -->
-  <meta property="og:title" content="Tarjeta Digital - Rocío del Pilar Tenorio">
-  <meta property="og:description" content="Gerente de Finanzas y Contabilidad en Ashimori Industria de México. Contáctame fácilmente desde mi tarjeta digital.">
-  <meta property="og:image" content="imagenes/card-preview.jpg">
-  <meta property="og:url" content="https://tusitio.com/rocio-tenorio">
+  <!-- Open Graph / Social preview -->
+  <meta property="og:title" content="Tarjeta Digital - Ángel Durán Montes">
+  <meta property="og:description" content="Gerente de Finanzas y Contabilidad. Contáctame desde mi tarjeta digital.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://demo-beta-sage.vercel.app/">
+  <!-- URL ABSOLUTA a la imagen en producción -->
+  <meta property="og:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.jpg?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.jpg?v=2">
 
   <style>
     /* ===== Reset & Vars ===== */
@@ -22,6 +28,8 @@
       --ink:#fff;
       --accent:#7cc0ff;
       --divider:linear-gradient(180deg,rgba(255,255,255,.28),rgba(0,0,0,.40),rgba(255,255,255,.22));
+      --link:#0a66ff;
+      --link-hover:#0751cc;
     }
     body{
       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
@@ -130,13 +138,13 @@
 
     /* Solo la información (p) es link y azul */
     .clickable-link{
-      color:#0a66ff;       /* azul tipo link */
+      color:var(--link);
       text-decoration:none;
       cursor:pointer;
       transition:color .15s ease;
       display:inline-block;
     }
-    .clickable-link:hover{ color:#0751cc; }
+    .clickable-link:hover{ color:var(--link-hover); }
 
     /* ===== Redes ===== */
     .social-section{
@@ -171,7 +179,7 @@
   <div id="app">
     <header class="header">
       <div class="profile-photo">
-        <img src="imagenes/foto-profile.png" alt="Foto de perfil Demo">
+        <img src="imagenes/foto-profile.png" alt="Foto de perfil">
       </div>
       <h1 class="name">Ángel Durán Montes</h1>
       <p class="title">Gerente de Finanzas y Contabilidad</p>
@@ -298,8 +306,8 @@
     /* === Compartir (Web Share API + Fallback) === */
     function shareCard(){
       const shareData = {
-        title: 'Tarjeta Digital - Rocío del Pilar Tenorio',
-        text: 'Conoce mis datos de contacto y redes en mi tarjeta digital.',
+        title: 'Ver Mi Tarjeta',
+        text: 'Ver Mi Tarjeta',
         url: 'https://demo-beta-sage.vercel.app/'
       };
 
