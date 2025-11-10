@@ -1,26 +1,29 @@
 {
-  "routes": [
-    { "src": "/r", "status": 200, "dest": "/" }
+  "redirects": [
+    { "source": "/", "destination": "/index.html", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/r", "destination": "/index.html" }
   ],
   "headers": [
     {
-      "source": "/r",
+      "source": "/index.html",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, max-age=0" },
-        { "key": "Pragma", "value": "no-cache" },
-        { "key": "Expires", "value": "0" }
+        { "key": "Cache-Control", "value": "no-store, must-revalidate" },
+        { "key": "Accept-Ranges", "value": "none" }
       ]
     },
     {
-      "source": "/",
+      "source": "/imagenes/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
+        { "key": "Accept-Ranges", "value": "none" }
       ]
     },
     {
-      "source": "/imagenes/card-preview.v3.jpg",
+      "source": "/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        { "key": "Accept-Ranges", "value": "none" }
       ]
     }
   ]
