@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0a243f" />
 
   <!-- =========================================================
-       SEO / Open Graph — ACTUALIZA título, descripción, URL e imagen
+       SEO / Open Graph — ACTUALIZA solo si cambia el dominio/imagen
        ========================================================= -->
   <title>Tarjeta Digital – Ángel Durán Monte</title>
   <meta name="description" content="Gerente de Finanzas y Contabilidad. Contáctame desde mi tarjeta digital.">
@@ -22,9 +22,9 @@
   <meta property="og:site_name" content="Tarjeta Digital">
   <meta property="og:url" content="https://demo-beta-sage.vercel.app/">
 
-  <!-- Imagen OG (1200x630, <2MB). VERSIONADA EN EL NOMBRE -->
-  <meta property="og:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v2.jpg">
-  <meta property="og:image:secure_url" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v2.jpg">
+  <!-- Imagen OG (1200x630, <2MB). Usa el archivo que ya tienes en /imagenes -->
+  <meta property="og:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v3.jpg">
+  <meta property="og:image:secure_url" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v3.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/jpeg">
@@ -32,9 +32,9 @@
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tarjeta Digital – Ángel Durán Monte">
+  <meta name="twitter:title" content="Mi Tarjeta – Ángel Durán Monte">
   <meta name="twitter:description" content="Gerente de Finanzas y Contabilidad. Contáctame desde mi tarjeta digital.">
-  <meta name="twitter:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v2.jpg">
+  <meta name="twitter:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v3.jpg">
 
   <style>
     /* ===== Reset & Vars ===== */
@@ -50,17 +50,20 @@
     }
     html,body{min-height:100%}
     body{
-      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+      font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       background:linear-gradient(135deg,#153d6a 0%,#0a243f 100%);
       color:#111; overflow-x:hidden; font-size:18px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      text-rendering:optimizeLegibility;
     }
 
-    /* ===== Splash (animación más suave, sin cambiar tamaño) ===== */
+    /* ===== Splash (animación suave, logo más grande en móvil) ===== */
     #splash{
       position:fixed; inset:0; z-index:9999;
       display:flex; align-items:center; justify-content:center;
       background:url('https://i.postimg.cc/PJBHGr5N/fondo-ashimori.jpg') center/cover no-repeat;
-      animation:fadeOut .5s ease-in-out 2.5s forwards;   /* se va a los 2.5s */
+      animation:fadeOut .5s ease-in-out 2.5s forwards;
       will-change: opacity, visibility;
       contain: content;
     }
@@ -68,30 +71,26 @@
       display:flex; align-items:center; justify-content:center;
       opacity:0; transform:translateZ(0) scale(.72);
       will-change: transform, opacity;
-      animation:logoAppear 1s ease-out .2s forwards;     /* entrada suave del logo */
+      animation:logoAppear 1s ease-out .2s forwards;
     }
-    /* >>> MANTENEMOS EXACTAMENTE TUS LÍMITES ORIGINALES <<< */
     #splash-logo img{
-      max-width:78vw; 
-      max-height:40vh; 
+      max-width:92vw;     /* más grande en móvil */
+      max-height:55vh;    /* más alto en móvil */
       object-fit:contain;
     }
     @media (min-width:768px){
-      #splash-logo img{ max-width:40vw; max-height:46vh; }
+      #splash-logo img{ max-width:42vw; max-height:50vh; }
     }
-    /* Keyframes suaves con overshoot, sin tocar dimensiones */
     @keyframes logoAppear{
       0%   { opacity:0; transform:translateZ(0) scale(.72); }
-      60%  { opacity:1; transform:translateZ(0) scale(1.06); } /* overshoot leve */
+      60%  { opacity:1; transform:translateZ(0) scale(1.06); }
       85%  { opacity:1; transform:translateZ(0) scale(.995); }
       100% { opacity:1; transform:translateZ(0) scale(1); }
     }
     @keyframes fadeOut{ to{ opacity:0; visibility:hidden; } }
-    /* Aparición del app sincronizada */
     #app{ opacity:0; animation:appFadeIn .5s ease-in-out 2.8s forwards; }
     @keyframes appFadeIn{ to{ opacity:1; } }
 
-    /* Respeto a usuarios con menos movimiento */
     @media (prefers-reduced-motion: reduce){
       #splash, #splash-logo, #app{ animation:none !important; }
       #splash-logo{ opacity:1; transform:none; }
@@ -109,8 +108,21 @@
       display:flex;align-items:center;justify-content:center;
     }
     .profile-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
-    .name{color:#fff;font-size:clamp(24px,5vw,32px);line-height:1.15;margin-bottom:8px;font-weight:700}
-    .title{color:rgba(255,255,255,.92);font-size:clamp(14px,2.6vw,18px);margin-bottom:22px;font-weight:500}
+
+    .name{
+      color:#fff;
+      font-size:clamp(24px,5vw,32px);
+      line-height:1.15;
+      margin-bottom:8px;
+      font-weight:700;
+      letter-spacing:-0.2px;
+    }
+    .title{
+      color:rgba(255,255,255,.92);
+      font-size:clamp(14px,2.6vw,18px);
+      margin-bottom:22px;
+      font-weight:500;
+    }
 
     /* ===== Botonera superior ===== */
     .action-wrap{padding:0 16px}
@@ -131,7 +143,6 @@
     .action-btn svg{width:18px;height:18px;fill:currentColor}
     .action-btn:hover{background:rgba(255,255,255,.10)}
     .action-btn:active{transform:translateY(1px);background:rgba(255,255,255,.12)}
-    /* Variante blanca para botón Ubicación */
     .action-btn--white{color:#fff;text-decoration:none}
 
     .icon-btn{flex:0 0 auto;width:46px;height:46px;border-radius:12px;padding:0;display:flex;align-items:center;justify-content:center}
@@ -155,18 +166,33 @@
       width:42px;height:42px;background:#f0f7ff;border-radius:50%;
       display:flex;align-items:center;justify-content:center;color:#0f3156;flex:0 0 42px;margin-top:2px
     }
-    .contact-details h3{font-size:clamp(14px,3vw,18px);color:#666;margin-bottom:4px;text-transform:uppercase;font-weight:400}
-    .contact-details p{font-size:clamp(15px,3.4vw,17px);color:#333;font-weight:500;overflow-wrap:anywhere}
+    .contact-details h3{
+      font-size:clamp(14px,3vw,18px);
+      color:#666;margin-bottom:4px;text-transform:uppercase;
+      font-weight:400; letter-spacing:.4px;
+    }
+    .contact-details p{
+      font-size:clamp(15px,3.4vw,17px);
+      color:#333;font-weight:500;
+      overflow-wrap:anywhere;word-break:break-word;
+      line-height:1.25;
+    }
 
-    /* Links azules, sin subrayado (botón Ubicación en blanco) */
-    .clickable-link{
-      color:var(--link);
+    /* Links (Email/Phone/Web/Address) igual que el “dato Email” de la plantilla */
+    .contact-details a,
+    .contact-details .clickable-link{
+      font-size:clamp(15px,3.4vw,17px);
+      line-height:1.25;
+      font-weight:500;
+      color:#0066cc; /* azul de datos */
       text-decoration:none;
-      cursor:pointer;
       display:inline-block;
+      overflow-wrap:anywhere;
+      word-break:break-word;
       transition:color .15s ease;
     }
-    .clickable-link:hover{ color:var(--link-hover) }
+    .contact-details a:hover,
+    .contact-details .clickable-link:hover{ color:#0751cc; }
 
     /* ===== Redes ===== */
     .social-section{
@@ -208,7 +234,7 @@
 
       <div class="action-wrap">
         <div class="action-buttons" role="group" aria-label="Acciones">
-          <!-- Guardar contacto (reemplaza el vCard si aplica) -->
+          <!-- Guardar contacto -->
           <a class="action-btn" href="imagenes/contacto.vcf" download="contacto.vcf" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
             Guardar
@@ -216,7 +242,7 @@
 
           <span class="divider" aria-hidden="true"></span>
 
-          <!-- Ubicación (en blanco, sin subrayado) -->
+          <!-- Ubicación -->
           <a class="action-btn action-btn--white"
              href="https://www.google.com/maps/search/?api=1&query=Circuito%20San%20Roque%20Norte%20%23345%2C%20Parque%20industrial%20Santa%20Fe%20Ampliaci%C3%B3n%2C%20Silao%2C%20Guanajuato%2C%20M%C3%A9xico%2C%20C.P.%2036275"
              target="_blank" rel="noopener" onclick="showToast('Abriendo Google Maps...')">
@@ -226,7 +252,7 @@
 
           <span class="divider" aria-hidden="true"></span>
 
-          <!-- Compartir (usa la URL canónica) -->
+          <!-- Compartir (MISMO SVG original) -->
           <button class="icon-btn" type="button" onclick="shareCard()" aria-label="Compartir" title="Compartir">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a3.3 3.3 0 0 0 0-1.39l7.02-4.11A2.99 2.99 0 0 0 18 7.91c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .23.03.45.08.66L8.05 9.78A2.99 2.99 0 0 0 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.89 0 1.69-.39 2.25-1l7.03 4.11c-.05.2-.08.42-.08.64 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/>
@@ -312,16 +338,15 @@
       return true;
     }
 
-    /* Compartir: usa la URL del <link rel="canonical"> */
+    /* Compartir: usa SIEMPRE la ruta limpia /r para evitar caché */
     function shareCard(){
-      const canonical=document.querySelector('link[rel="canonical"]');
-      const url=(canonical && canonical.href) || window.location.href;
-      const shareData={ title:document.title, text:document.title, url };
+      const url = 'https://demo-beta-sage.vercel.app/r';
+      const shareData = { title: document.title, text: document.title, url };
 
       if(navigator.share){
         navigator.share(shareData)
           .then(()=>showToast('Enlace compartido exitosamente'))
-          .catch(err=>console.log('Error al compartir:',err));
+          .catch(()=>{});
       }else if(navigator.clipboard && navigator.clipboard.writeText){
         navigator.clipboard.writeText(url)
           .then(()=>showToast('Enlace copiado al portapapeles'))
