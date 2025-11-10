@@ -3,21 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tarjeta Digital - Ángel Durán Monte</title>
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0a243f" />
+
+  <!-- =========================================================
+       SEO / Open Graph — TODO: ACTUALIZA ESTOS 4 CAMPOS PRINCIPALES
+       ========================================================= -->
+  <title>Tarjeta Digital – Ángel Durán Monte</title>
+  <meta name="description" content="Gerente de Finanzas y Contabilidad. Contáctame desde mi tarjeta digital.">
+
+  <!-- La URL canónica y og:url deben ser EXACTAMENTE la URL que compartes -->
+  <link rel="canonical" href="https://demo-beta-sage.vercel.app/">
 
   <!-- Open Graph / Social preview -->
-  <meta property="og:title" content="Tarjeta Digital - Ángel Durán Monte">
+  <meta property="og:title" content="Tarjeta Digital – Ángel Durán Monte">
   <meta property="og:description" content="Gerente de Finanzas y Contabilidad. Contáctame desde mi tarjeta digital.">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tarjeta Digital">
   <meta property="og:url" content="https://demo-beta-sage.vercel.app/">
-  <!-- URL ABSOLUTA a la imagen en producción -->
-  <meta property="og:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.jpg?v=2">
+
+  <!-- IMAGEN OG
+       - Sube la imagen en 1200×630 px y <2 MB
+       - Versiona en el NOMBRE cuando la cambies: card-preview.v2.jpg, v3, etc.
+       - NO uses querystrings aquí.
+  -->
+  <meta property="og:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v1.jpg">
+  <meta property="og:image:secure_url" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v1.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/jpeg">
-  <!-- Twitter -->
+  <meta property="og:image:alt" content="Tarjeta digital de Ángel Durán Monte">
+
+  <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.jpg?v=2">
+  <meta name="twitter:title" content="Tarjeta Digital – Ángel Durán Monte">
+  <meta name="twitter:description" content="Gerente de Finanzas y Contabilidad. Contáctame desde mi tarjeta digital.">
+  <meta name="twitter:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v1.jpg">
 
   <style>
     /* ===== Reset & Vars ===== */
@@ -31,18 +52,19 @@
       --link:#0a66ff;
       --link-hover:#0751cc;
     }
+    html,body{min-height:100%}
     body{
       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
       background:linear-gradient(135deg,#153d6a 0%,#0a243f 100%);
-      color:#111; min-height:100%; overflow-x:hidden; font-size:18px;
+      color:#111; overflow-x:hidden; font-size:18px;
     }
 
-    /* ===== Splash (más fluido y rápido) ===== */
+    /* ===== Splash ===== */
     #splash{
       position:fixed;inset:0;z-index:9999;
       display:flex;align-items:center;justify-content:center;
       background:url('https://i.postimg.cc/PJBHGr5N/fondo-ashimori.jpg') center/cover no-repeat;
-      animation:fadeOut .45s ease-in-out 2.0s forwards; /* sale antes y más ágil */
+      animation:fadeOut .45s ease-in-out 2.0s forwards;
     }
     #splash-logo{
       display:flex;align-items:center;justify-content:center;
@@ -52,18 +74,16 @@
     }
     #splash-logo img{max-width:78vw; max-height:40vh; object-fit:contain}
     @media (min-width:768px){ #splash-logo img{max-width:40vw; max-height:46vh} }
-
     @keyframes logoReveal{
-      0%   {opacity:0; transform:scale(.72)}
-      60%  {opacity:1; transform:scale(1.03)} /* overshoot ligero */
-      85%  {opacity:1; transform:scale(.995)}
-      100% {opacity:1; transform:scale(1)}
+      0%{opacity:0;transform:scale(.72)}
+      60%{opacity:1;transform:scale(1.03)}
+      85%{opacity:1;transform:scale(.995)}
+      100%{opacity:1;transform:scale(1)}
     }
     @keyframes fadeOut{to{opacity:0;visibility:hidden}}
-    #app{opacity:0;animation:appFadeIn .4s ease-in 2.2s forwards} /* aparece pronto tras el splash */
+    #app{opacity:0;animation:appFadeIn .4s ease-in 2.2s forwards}
     @keyframes appFadeIn{to{opacity:1}}
 
-    /* Respeto a usuarios con preferencias de menos movimiento */
     @media (prefers-reduced-motion: reduce){
       #splash-logo{animation:none;opacity:1;transform:none}
       #splash{animation:none}
@@ -92,11 +112,7 @@
       box-shadow:0 10px 24px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.30), inset 0 -1px 0 rgba(0,0,0,.16);
       backdrop-filter:blur(2px);overflow:hidden
     }
-    .divider{
-      width:1px;margin:6px 6px;
-      background:var(--divider);
-      opacity:.9; pointer-events:none;
-    }
+    .divider{width:1px;margin:6px 6px;background:var(--divider);opacity:.9;pointer-events:none}
     .action-btn{
       flex:1 1 0;border:0;cursor:pointer;background:transparent;color:var(--ink);
       padding:clamp(10px,3vw,14px) 10px;border-radius:12px;
@@ -108,11 +124,7 @@
     .action-btn:hover{background:rgba(255,255,255,.10)}
     .action-btn:active{transform:translateY(1px);background:rgba(255,255,255,.12)}
 
-    /* Botón de compartir (icon-only y más pequeño) */
-    .icon-btn{
-      flex:0 0 auto; width:46px; height:46px; border-radius:12px; padding:0;
-      display:flex; align-items:center; justify-content:center;
-    }
+    .icon-btn{flex:0 0 auto;width:46px;height:46px;border-radius:12px;padding:0;display:flex;align-items:center;justify-content:center}
     .icon-btn svg{width:20px;height:20px}
 
     @media (max-width:360px){
@@ -136,15 +148,8 @@
     .contact-details h3{font-size:clamp(14px,3vw,18px);color:#666;margin-bottom:4px;text-transform:uppercase;font-weight:400}
     .contact-details p{font-size:clamp(15px,3.4vw,17px);color:#333;font-weight:500;overflow-wrap:anywhere}
 
-    /* Solo la información (p) es link y azul */
-    .clickable-link{
-      color:var(--link);
-      text-decoration:none;
-      cursor:pointer;
-      transition:color .15s ease;
-      display:inline-block;
-    }
-    .clickable-link:hover{ color:var(--link-hover); }
+    .clickable-link{color:var(--link);text-decoration:none;cursor:pointer;transition:color .15s ease;display:inline-block}
+    .clickable-link:hover{color:var(--link-hover)}
 
     /* ===== Redes ===== */
     .social-section{
@@ -169,9 +174,9 @@
 <body>
 
   <!-- Splash -->
-  <div id="splash">
-    <div id="splash-logo" aria-hidden="true">
-      <img src="imagenes/logo.png" alt="Logo">
+  <div id="splash" aria-hidden="true">
+    <div id="splash-logo">
+      <img src="imagenes/logo.png" alt="Logo" loading="lazy">
     </div>
   </div>
 
@@ -179,15 +184,15 @@
   <div id="app">
     <header class="header">
       <div class="profile-photo">
-        <img src="imagenes/foto-profile.png" alt="Foto de perfil">
+        <img src="imagenes/foto-profile.png" alt="Foto de perfil" loading="lazy">
       </div>
       <h1 class="name">Ángel Durán Monte</h1>
       <p class="title">Gerente de Finanzas y Contabilidad</p>
 
       <div class="action-wrap">
         <div class="action-buttons" role="group" aria-label="Acciones">
-          <!-- Guardar -->
-          <a class="action-btn" href="imagenes/rocio-tenorio.vcf" download="rocio-tenorio.vcf" rel="noopener">
+          <!-- Guardar contacto (TODO: reemplaza el vCard si aplica) -->
+          <a class="action-btn" href="imagenes/contacto.vcf" download="contacto.vcf" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
             Guardar
           </a>
@@ -202,7 +207,7 @@
 
           <span class="divider" aria-hidden="true"></span>
 
-          <!-- Compartir (icon-only, más pequeño) -->
+          <!-- Compartir -->
           <button class="icon-btn" type="button" onclick="shareCard()" aria-label="Compartir" title="Compartir">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a3.3 3.3 0 0 0 0-1.39l7.02-4.11A2.99 2.99 0 0 0 18 7.91c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .23.03.45.08.66L8.05 9.78A2.99 2.99 0 0 0 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.89 0 1.69-.39 2.25-1l7.03 4.11c-.05.2-.08.42-.08.64 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/>
@@ -216,7 +221,7 @@
     <div class="contact-info">
       <div class="contact-item">
         <div class="contact-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
         </div>
         <div class="contact-details">
           <h3>Teléfono</h3>
@@ -226,7 +231,7 @@
 
       <div class="contact-item">
         <div class="contact-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         </div>
         <div class="contact-details">
           <h3>Email</h3>
@@ -236,7 +241,7 @@
 
       <div class="contact-item">
         <div class="contact-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
         </div>
         <div class="contact-details">
           <h3>Sitio Web</h3>
@@ -246,11 +251,11 @@
 
       <div class="contact-item clickable" onclick="openMaps()">
         <div class="contact-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         </div>
         <div class="contact-details">
           <h3>Dirección</h3>
-          <p id="address">Circuito San Roque Norte #345, Parque industrial Santa Fe Ampliacion, Silao, Guanajuato, Mexico, C.P. 36275</p>
+          <p id="address">Circuito San Roque Norte #345, Parque industrial Santa Fe Ampliación, Silao, Guanajuato, México, C.P. 36275</p>
         </div>
       </div>
     </div>
@@ -260,26 +265,29 @@
       <h2 class="social-title">Sígueme en Redes Sociales</h2>
       <div class="social-links">
         <a class="social-btn" href="https://www.linkedin.com/in/#" target="_blank" rel="noopener">
-          <img src="imagenes/linkedin.png" alt="LinkedIn"><span>LinkedIn</span>
+          <img src="imagenes/linkedin.png" alt="LinkedIn" loading="lazy"><span>LinkedIn</span>
         </a>
         <a class="social-btn" href="https://www.instagram.com/#" target="_blank" rel="noopener">
-          <img src="imagenes/insta.png" alt="Instagram"><span>Instagram</span>
+          <img src="imagenes/insta.png" alt="Instagram" loading="lazy"><span>Instagram</span>
         </a>
         <a class="social-btn" href="https://wa.me/524778811195?text=Hola%2C%20me%20interesa%20la%20tarjeta%20digital" target="_blank" rel="noopener">
-          <img src="imagenes/whatsapp.png" alt="WhatsApp"><span>WhatsApp</span>
+          <img src="imagenes/whatsapp.png" alt="WhatsApp" loading="lazy"><span>WhatsApp</span>
         </a>
       </div>
     </div>
   </div>
 
   <!-- Toast -->
-  <div id="toast" class="toast"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
+    /* Utilidades UI */
     function showToast(msg){
       const t=document.getElementById('toast');
       t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);
     }
+
+    /* Acciones contacto */
     function callPhone(){
       const raw=(document.getElementById('phone').textContent||'').trim();
       let cleaned=raw.replace(/[^\d+]/g,'').replace(/(?!^)\+/g,'');
@@ -288,7 +296,7 @@
     function sendEmail(){
       const email=document.getElementById('email').textContent.trim();
       const name=document.querySelector('.name').textContent.trim();
-      window.open(`mailto:${email}?subject=Contacto desde tarjeta digital&body=Hola ${name},`,'_blank');
+      window.open(`mailto:${email}?subject=Contacto desde tarjeta digital&body=Hola ${encodeURIComponent(name)},`,'_blank');
       showToast('Abriendo aplicación de email...');
     }
     function openWebsite(){
@@ -303,24 +311,22 @@
       window.open(mapsUrl,'_blank','noopener,noreferrer');showToast('Abriendo Google Maps...');
     }
 
-    /* === Compartir (Web Share API + Fallback) === */
+    /* Compartir: toma la URL del <link rel="canonical"> para evitar hardcode */
     function shareCard(){
-      const shareData = {
-        title: 'Ver Mi Tarjeta',
-        text: 'Ver Mi Tarjeta',
-        url: 'https://demo-beta-sage.vercel.app/'
-      };
+      const canonical=document.querySelector('link[rel="canonical"]');
+      const url=(canonical && canonical.href) || window.location.href;
+      const shareData={ title:document.title, text:document.title, url };
 
-      if (navigator.share) {
+      if(navigator.share){
         navigator.share(shareData)
-          .then(() => showToast('Enlace compartido exitosamente'))
-          .catch((err) => console.log('Error al compartir:', err));
-      } else if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(shareData.url)
-          .then(() => showToast('Enlace copiado al portapapeles'))
-          .catch(() => alert('Copia este enlace: ' + shareData.url));
-      } else {
-        alert('Copia este enlace: ' + shareData.url);
+          .then(()=>showToast('Enlace compartido exitosamente'))
+          .catch(err=>console.log('Error al compartir:',err));
+      }else if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(url)
+          .then(()=>showToast('Enlace copiado al portapapeles'))
+          .catch(()=>alert('Copia este enlace: '+url));
+      }else{
+        alert('Copia este enlace: '+url);
       }
     }
   </script>
